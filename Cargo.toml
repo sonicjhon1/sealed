@@ -1,0 +1,54 @@
+cargo-features = ["profile-rustflags"]
+
+[workspace]
+resolver = "3"
+members = ["packages/*"]
+
+[workspace.package]
+authors = ["sonicjhon1"]
+edition = "2024"
+repository = "https://github.com/sonicjhon1/sealed"
+
+[workspace.dependencies]
+# Workspace crate
+sealed_dioxus_ui = { path = "packages/sealed_dioxus_ui" }
+# Common deps
+chrono = { version = "0.4", features = ["serde"] }
+derive_more = { version = "2.1", features = ["from", "display"] }
+lupabase = { git = "https://github.com/sonicjhon1/lupabase", features = [
+    "cbor",
+    "nightly",
+] }
+image = { version = "0.25", features = ["rayon"] }
+rayon = { version = "1.11" }
+rootcause = "0.12"
+rootcause-backtrace = "0.12"
+serde = { version = "1.0.228", features = ["derive"] }
+tracing = { version = "0.1", features = ["log"] }
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+
+[workspace.lints.clippy]
+needless_return = "allow"
+type_complexity = "allow"
+
+[profile.dev]
+opt-level = 1
+
+# Enable high optimizations for dependencies, but not for our code:
+[profile.dev.package."*"]
+opt-level = 3
+
+[profile.wasm-dev]
+inherits = "dev"
+
+[profile.release]
+opt-level = 'z'
+lto = true
+strip = true
+incremental = false
+panic = "abort"
+debug = false
+
+[profile.native]
+inherits = "release"
+rustflags = ["-Ctarget-cpu=native"]

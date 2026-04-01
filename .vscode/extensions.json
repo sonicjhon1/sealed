@@ -1,0 +1,12 @@
+{
+	"recommendations": [
+		"1yib.rust-bundle",
+		"dustypomerleau.rust-syntax",
+		"fill-labs.dependi",
+		"oderwat.indent-rainbow",
+		"rust-lang.rust-analyzer",
+		"tamasfe.even-better-toml",
+		"usernamehw.errorlens",
+		"wgsl-analyzer.wgsl-analyzer"
+	]
+}

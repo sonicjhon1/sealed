@@ -1,0 +1,48 @@
+[package]
+name = "sealed_dioxus_ui"
+version = "0.1.0"
+authors = { workspace = true }
+edition = { workspace = true }
+repository = { workspace = true }
+
+[dependencies]
+arboard = { version = "3.6", optional = true }
+base64 = "0.22"
+chrono = { workspace = true }
+dashmap = { version = "6.1", optional = true }
+derive_more = { workspace = true }
+dioxus = { path = "../../../dioxus/packages/dioxus/", features = [
+    "fullstack",
+    "router",
+] }
+human_bytes = { version = "0.4", default-features = false }
+lupabase = { workspace = true }
+nucleo-matcher = { version = "0.3", optional = true }
+reqwest = { version = "0.13", optional = true }
+serde = { workspace = true }
+serde_bytes = { version = "0.11" }
+url = { version = "2.5", features = ["serde"] }
+yt-dlp = { version = "2.7", features = [
+    "hooks",
+    "hickory-dns",
+    "rustls",
+], optional = true }
+
+[features]
+default = ["desktop"]
+web = ["dioxus/web"]
+desktop = ["dioxus/desktop"]
+mobile = ["dioxus/mobile"]
+server = [
+    "dioxus/server",
+    "dep:arboard",
+    "dep:dashmap",
+    "dep:nucleo-matcher",
+    "dep:reqwest",
+    "reqwest/hickory-dns",
+    "reqwest/zstd",
+    "dep:yt-dlp",
+]
+
+[lints]
+workspace = true
