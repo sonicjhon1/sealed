@@ -225,19 +225,12 @@ pub async fn main_websocket(
         loop {
             match ws.recv().await {
                 Ok(MainWSClient::FetchDownloadItems { filter_query }) => {
-                    let server_duration = std::time::Instant::now();
-
                     main_states.filter_query = filter_query;
 
                     ws.send(MainWSServer::DownloadItems(
                         main_states.filtered_download_items(),
                     ))
                     .await?;
-
-                    debug!(
-                        "Server completed in ({}ms)",
-                        server_duration.elapsed().as_millis_f64()
-                    );
                 }
                 Ok(MainWSClient::NewDownload {
                     download_url_info,

@@ -9,6 +9,7 @@ repository = { workspace = true }
 arboard = { version = "3.6", optional = true }
 base64 = "0.22"
 chrono = { workspace = true }
+enable-ansi-support = { version = "0.3" }
 dashmap = { version = "6.1", optional = true }
 derive_more = { workspace = true }
 dioxus = { path = "../../../dioxus/packages/dioxus/", features = [
@@ -19,8 +20,11 @@ human_bytes = { version = "0.4", default-features = false }
 lupabase = { workspace = true }
 nucleo-matcher = { version = "0.3", optional = true }
 reqwest = { version = "0.13", optional = true }
+rootcause = { workspace = true }
+rootcause-backtrace = { workspace = true }
 serde = { workspace = true }
 serde_bytes = { version = "0.11" }
+tracing-subscriber = { workspace = true }
 url = { version = "2.5", features = ["serde"] }
 yt-dlp = { version = "2.7", features = [
     "hooks",
