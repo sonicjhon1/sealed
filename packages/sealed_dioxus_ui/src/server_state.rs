@@ -9,9 +9,7 @@ use nucleo_matcher::{
     Config, Matcher, Utf32Str,
     pattern::{CaseMatching, Normalization, Pattern},
 };
-use std::sync::LazyLock;
-
-use std::result::Result;
+use std::{result::Result, sync::LazyLock};
 
 pub static YT_DLP_LIBRARIES: LazyLock<yt_dlp::client::Libraries> = LazyLock::new(|| {
     yt_dlp::client::Libraries::new(
@@ -60,7 +58,11 @@ impl MainStates {
     }
 
     pub fn filtered_download_items(&self) -> Vec<DownloadItem> {
-        let pattern = Pattern::parse(&self.filter_query, CaseMatching::Ignore, Normalization::Smart);
+        let pattern = Pattern::parse(
+            &self.filter_query,
+            CaseMatching::Ignore,
+            Normalization::Smart,
+        );
         let mut matcher = Matcher::new(Config::DEFAULT);
         let mut haystack_buffer = vec![];
 
