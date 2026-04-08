@@ -18,7 +18,13 @@ fn main() {
         .install()
         .expect("failed to install rootcause's hooks");
 
-    tracing_subscriber::fmt().with_ansi(true).init();
+    tracing_subscriber::fmt()
+        .with_env_filter(
+            tracing_subscriber::EnvFilter::try_from_default_env()
+                .unwrap_or_else(|_| tracing_subscriber::EnvFilter::new("debug")),
+        )
+        .with_ansi(true)
+        .init();
 
     let _ = enable_ansi_support::enable_ansi_support();
 
