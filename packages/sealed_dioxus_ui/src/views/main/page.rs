@@ -336,12 +336,12 @@ pub fn MainBarDownloadQueue() -> Element {
                             Some(MainBarNewDownloadPhase::Configuration {}) => {
                                 match new_download_url_info.value() {
                                     Some(Ok(url_info)) => rsx! {
-                                        div { class: "flex h-24 gap-2 max-w-prose",
+                                        div { class: "flex h-24 gap-2",
                                             img {
                                                 class: "rounded-box overflow-clip h-full",
                                                 src: if let Some(thumbnail) = url_info().thumbnail { format!("data:image/png;base64,{}", BASE64_STANDARD.encode(thumbnail)) },
                                             }
-                                            div { class: "flex flex-col",
+                                            div { class: "flex flex-col max-w-prose",
                                                 div { class: "text-multiline-ellipsis [--line-clamp:1] font-semibold", {url_info().title} }
                                                 pre { class: "text-multiline-ellipsis [--line-clamp:2] text-sm",
                                                     {url_info().description.map(|d| d.replace("\n\n", "\n"))}
