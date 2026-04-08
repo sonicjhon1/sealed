@@ -213,6 +213,7 @@ pub async fn main_websocket(
     options: WebSocketOptions,
 ) -> Result<Websocket<MainWSClient, MainWSServer, CborEncoding>> {
     use crate::server_state::*;
+    use lupabase::record::utils::DatabaseRecordsUtils;
 
     Ok(options.try_on_upgrade(move |mut ws| async move {
         let mut main_states = MainStates::initialize()?;
@@ -310,7 +311,18 @@ pub async fn main_websocket(
                             item_date_added: chrono::Utc::now(),
                             item_state: DownloadItemState::Pending,
                         };
-                        main_states.insert_download_item(download_item.clone())?;
+
+                        if let Some(existing) = main_states
+                            .get_download_items()?
+                            .find_by_unique(&download_item.id)
+                            //TODO: Race condition possible
+                            && let DownloadItemState::Ok { .. } = existing.item_state
+                        {
+                            warn!("Duplicated ID already exist and state is (Ok)!");
+                            continue;
+                        }
+
+                        main_states.upsert_download_item(download_item.clone())?;
                         ws.send(MainWSServer::DownloadItems(
                             main_states.filtered_download_items(),
                         ))

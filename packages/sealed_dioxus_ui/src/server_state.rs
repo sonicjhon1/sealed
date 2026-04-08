@@ -37,6 +37,12 @@ impl MainStates {
         })
     }
 
+    pub fn get_download_items(&mut self) -> Result<Vec<DownloadItem>, CapturedError> {
+        self.download_items = DATABASE.get_all::<DownloadItem>()?;
+
+        Ok(self.download_items.clone())
+    }
+
     pub fn insert_download_item(
         &mut self,
         download_item: DownloadItem,
@@ -52,6 +58,16 @@ impl MainStates {
         download_item: DownloadItem,
     ) -> Result<(), CapturedError> {
         DATABASE.update(download_item)?;
+        self.download_items = DATABASE.get_all::<DownloadItem>()?;
+
+        Ok(())
+    }
+
+    pub fn upsert_download_item(
+        &mut self,
+        download_item: DownloadItem,
+    ) -> Result<(), CapturedError> {
+        DATABASE.upsert(download_item)?;
         self.download_items = DATABASE.get_all::<DownloadItem>()?;
 
         Ok(())
