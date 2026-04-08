@@ -242,6 +242,7 @@ pub async fn main_websocket(
                     let libraries = crate::server_state::YT_DLP_LIBRARIES.clone();
 
                     let mut download_command = std::process::Command::new(&libraries.youtube);
+                    download_command.args(["--verbose", "-t", "sleep"]);
 
                     if audio_video_format_ids.is_empty() {
                         download_command.arg("--skip-download");
@@ -260,7 +261,14 @@ pub async fn main_websocket(
                     let subtitle_ids = subtitle_ids.into_iter().collect::<Vec<_>>().join(",");
                     if !subtitle_ids.is_empty() {
                         download_command
-                            .args(["--write-subs", "--write-auto-subs", "--sub-langs"])
+                            .args([
+                                //TODO: Without this, yt-dlp returns ERROR: Unable to download video subtitles for 'XX': HTTP Error 429: Too Many Requests
+                                "--sleep-subtitles",
+                                "60",
+                                "--write-subs",
+                                "--write-auto-subs",
+                                "--sub-langs",
+                            ])
                             .arg(&subtitle_ids);
                     }
 
