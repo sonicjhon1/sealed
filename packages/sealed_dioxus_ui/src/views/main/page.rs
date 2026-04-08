@@ -2,7 +2,7 @@ use crate::{
     components::tabs::TabButtonRequired,
     icons::{Icon, lucide},
     storage::{
-        AudioVideoFormatId, DownloadUrlInfoSubtitle, DownloadUrlSelection,
+        AudioVideoFormatId, DownloadItemState, DownloadUrlInfoSubtitle, DownloadUrlSelection,
         optional_audio_video_format_id_contains,
     },
     views::main::server::{
@@ -265,7 +265,47 @@ pub fn MainBarDownloadQueue() -> Element {
             }
             if let Some(download_items_read) = download_items() {
                 for download_item in download_items_read {
-                    MainBarDownloadQueueCard { "{download_item.title} {download_item.id}" }
+                    MainBarDownloadQueueCard {
+                        div { class: "flex flex-col flex-1",
+                            div { class: "flex flex-col flex-1",
+                                div { class: "font-semibold", "{download_item.title}" }
+                                div { class: "text-xs opacity-50", "{download_item.id}" }
+                            }
+                            div { class: "flex",
+                                match download_item.item_state {
+                                    DownloadItemState::Pending => rsx! {
+                                        div { class: "badge badge-neutral",
+                                            span { class: "loading loading-spinner loading-xs text-current" }
+                                            "Pending"
+                                        }
+                                    },
+                                    DownloadItemState::Downloading { progress } => rsx! {
+                                        div { class: "badge badge-warning",
+                                            span { class: "loading loading-spinner loading-xs text-current" }
+                                            "{progress * 100 / 255}%"
+                                        }
+                                    },
+                                    DownloadItemState::Error => rsx! {
+                                        div { class: "badge badge-error",
+                                            Icon { class: "text-current", size: "1rem", data: lucide::CircleX }
+                                            "Error"
+                                        }
+                                    },
+                                    DownloadItemState::Ok { date_finished } => rsx! {
+                                        div { class: "badge badge-success",
+                                            Icon { class: "text-current", size: "1rem", data: lucide::CircleCheck }
+                                            {
+                                                date_finished
+                                                    .with_timezone(&chrono::Local)
+                                                    .format("%Y-%m-%d %H:%M:%S")
+                                                    .to_string()
+                                            }
+                                        }
+                                    },
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
