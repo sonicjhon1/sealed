@@ -250,19 +250,24 @@ pub async fn main_websocket(
 
                     let mut download_command = std::process::Command::new(&libraries.youtube);
 
+                    if audio_video_format_ids.is_empty() {
+                        download_command.arg("--skip-download");
+                    }
+
                     let format_ids = [audio_video_format_ids.join("+")]
                         .into_iter()
                         .chain(storyboard_format_ids.into_iter())
+                        .filter(|s| !s.is_empty())
                         .collect::<Vec<_>>()
                         .join(",");
                     if !format_ids.is_empty() {
                         download_command.arg("-f").arg(&format_ids);
-                    };
+                    }
 
                     let subtitle_ids = subtitle_ids.into_iter().collect::<Vec<_>>().join(",");
                     if !subtitle_ids.is_empty() {
                         download_command
-                            .args(["--write-subs", "--sub-langs"])
+                            .args(["--write-subs", "--write-auto-subs", "--sub-langs"])
                             .arg(&subtitle_ids);
                     }
 
@@ -279,6 +284,15 @@ pub async fn main_websocket(
                                     .join("%(title).200B [%(id)s].%(ext)s"),
                             )
                             .arg(&download_url_info.url);
+
+                        debug!(
+                            "Running yt-dlp with: ({})",
+                            download_command
+                                .get_args()
+                                .collect::<Vec<_>>()
+                                .join(std::ffi::OsStr::new(" "))
+                                .display()
+                        );
 
                         let mut download_item = DownloadItem {
                             id: format!(
