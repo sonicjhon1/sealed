@@ -1,6 +1,7 @@
 use crate::{
     components::tabs::TabButtonRequired,
     icons::{Icon, lucide},
+    route::Route,
     storage::{
         AudioVideoFormatId, DownloadItemState, DownloadUrlInfoSubtitle, DownloadUrlSelection,
         optional_audio_video_format_id_contains,
@@ -32,8 +33,11 @@ pub fn MainPage() -> Element {
             div { class: "flex basis-3xs rounded-lg p-2 bg-base-200",
                 div { class: "flex flex-1 flex-col gap-2",
                     div { class: "card overflow-clip rounded-box shadow-md transition-all hover:brightness-50",
-                        a { href: "https://www.pixiv.net/en/artworks/68132875",
-                            img { src: KEMONOMIMI_CHAN, alt: "kemonomimi-chan" }
+                        Link { to: Route::MainPage {},
+                            img {
+                                src: KEMONOMIMI_CHAN,
+                                alt: "kemonomimi-chan at https://www.pixiv.net/en/artworks/68132875",
+                            }
                         }
                     }
                     SideBar { active_section }
