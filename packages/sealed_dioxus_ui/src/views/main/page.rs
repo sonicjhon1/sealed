@@ -148,6 +148,13 @@ pub fn MainBarDownloadQueue() -> Element {
     let mut new_download_selection = use_signal(DownloadUrlSelection::default);
     let mut active_new_download_phase = use_signal(|| None);
 
+    let mut reset_new_download_states = move || {
+        new_download_url.set(None);
+        new_download_url_info.reset();
+        new_download_selection.set(DownloadUrlSelection::default());
+        active_new_download_phase.set(None);
+    };
+
     let mut websocket =
         use_websocket(move || main_websocket(WebSocketOptions::new().with_automatic_reconnect()));
 
@@ -232,8 +239,7 @@ pub fn MainBarDownloadQueue() -> Element {
                     div {
                         class: "btn btn-secondary",
                         onclick: move |_| {
-                            new_download_url.set(None);
-                            active_new_download_phase.set(None);
+                            reset_new_download_states();
                         },
                         Icon {
                             class: "text-current",
@@ -582,7 +588,7 @@ pub fn MainBarDownloadQueue() -> Element {
                                 div {
                                     class: "btn btn-secondary",
                                     onclick: move |_| {
-                                        active_new_download_phase.set(None);
+                                        reset_new_download_states();
                                     },
                                     Icon { class: "text-current", size: "1rem", data: lucide::CircleX }
                                     "Cancel"
@@ -613,7 +619,8 @@ pub fn MainBarDownloadQueue() -> Element {
                                                         .await else {
                                                         return;
                                                     };
-                                                    active_new_download_phase.set(None);
+
+                                                    reset_new_download_states();
                                                 });
                                             },
                                             Icon { class: "text-current", size: "1rem", data: lucide::Download }
@@ -624,8 +631,7 @@ pub fn MainBarDownloadQueue() -> Element {
                                         div {
                                             class: "btn btn-error",
                                             onclick: move |_| {
-                                                active_new_download_phase.set(None);
-                                                new_download_url_info.reset();
+                                                reset_new_download_states();
                                             },
                                             Icon { class: "text-current", size: "1rem", data: lucide::CircleX }
                                             "Close"
@@ -647,7 +653,7 @@ pub fn MainBarDownloadQueue() -> Element {
                     class: "modal-backdrop",
                     method: "dialog",
                     onclick: move |_| {
-                        active_new_download_phase.set(None);
+                        reset_new_download_states();
                     },
                     button { "Close dialog" }
                 }
