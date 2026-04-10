@@ -5,13 +5,13 @@
 # Sealed
 
 ### Blazingly fast Cross-platform Audio/Video/Subtitle Downloader
-#### Built as a cross-platform alternative to [Seal](https://github.com/JunkFood02/Seal)
+Built as a cross-platform alternative to [Seal](https://github.com/JunkFood02/Seal)
 
 <!-- [![Docs](https://docs.rs/sealed/badge.svg)](https://docs.rs/sealed/latest/sealed/) -->
 <!-- [![Crates.io](https://img.shields.io/crates/v/sealed.svg)](https://crates.io/crates/sealed) -->
 <!-- [![Downloads](https://img.shields.io/crates/d/sealed.svg)](https://crates.io/crates/sealed) -->
 ![GitHub Repo stars](https://img.shields.io/github/stars/sonicjhon1/sealed?style=flat)
-[![License](https://img.shields.io/badge/license-MIT%2FApache-blue.svg)](https://github.com/sonicjhon1/sealed#license)
+[![License](https://img.shields.io/github/license/sonicjhon1/sealed)](https://github.com/sonicjhon1/sealed/blob/main/LICENSE)
 
 </div>
 
@@ -97,7 +97,7 @@ Kemonomimi-chan arts by [naga_u](https://www.pixiv.net/en/users/2509595)
 
 ## License
 
-[![GitHub](https://img.shields.io/github/license/sonicjhon1/sealed)](https://github.com/sonicjhon1/sealed/blob/main/LICENSE)
+[![License](https://img.shields.io/github/license/sonicjhon1/sealed)](https://github.com/sonicjhon1/sealed/blob/main/LICENSE)
 
 All code in this repository is dual-licensed under either:
 
