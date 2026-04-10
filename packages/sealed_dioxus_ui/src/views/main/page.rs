@@ -18,7 +18,7 @@ use dioxus::{
 };
 
 pub const KEMONOMIMI_CHAN: Asset = asset!(
-    "/assets/kemonomimi_chan/af2c5d1fc588af7745b942944af1755e.jpg",
+    "/assets/kemonomimi_chan/kemonomimi_transparent.webp",
     AssetOptions::image()
         .with_format(ImageFormat::Avif)
         .with_preload(true)
@@ -32,7 +32,7 @@ pub fn MainPage() -> Element {
         div { class: "flex flex-1 gap-2",
             div { class: "flex basis-3xs rounded-lg p-2 bg-base-200",
                 div { class: "flex flex-1 flex-col gap-2",
-                    div { class: "card overflow-clip rounded-box shadow-md transition-all hover:brightness-50",
+                    div { class: "card bg-base-100 overflow-clip rounded-box shadow-md transition-all hover:brightness-50",
                         Link { to: Route::MainPage {},
                             img {
                                 src: KEMONOMIMI_CHAN,
