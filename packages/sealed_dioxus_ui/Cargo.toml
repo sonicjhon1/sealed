@@ -3,7 +3,11 @@ name = "sealed_dioxus_ui"
 version = "0.1.0"
 authors = { workspace = true }
 edition = { workspace = true }
+description = "Crossplatform Audio/Video/Subtitle Downloader, based on yt-dlp and dioxus"
 repository = { workspace = true }
+license = "MIT OR Apache-2.0"
+keywords = ["yt-dlp", "video", "audio", "downloader", "dioxus"]
+categories = ["multimedia::audio", "multimedia::video", "multimedia"]
 
 [dependencies]
 arboard = { version = "3.6", optional = true }
