@@ -12,7 +12,7 @@ chrono = { workspace = true }
 enable-ansi-support = { version = "0.3" }
 dashmap = { version = "6.1", optional = true }
 derive_more = { workspace = true }
-dioxus = { path = "../../../dioxus/packages/dioxus/", features = [
+dioxus = { git = "https://github.com/DioxusLabs/dioxus.git", rev = "71df8c7", features = [
     "fullstack",
     "router",
 ] }
