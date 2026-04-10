@@ -14,7 +14,6 @@ arboard = { version = "3.6", optional = true }
 base64 = "0.22"
 chrono = { workspace = true }
 enable-ansi-support = { version = "0.3" }
-dashmap = { version = "6.1", optional = true }
 derive_more = { workspace = true }
 dioxus = { git = "https://github.com/DioxusLabs/dioxus.git", rev = "71df8c7", features = [
     "fullstack",
@@ -29,7 +28,6 @@ rootcause-backtrace = { workspace = true }
 serde = { workspace = true }
 serde_bytes = { version = "0.11" }
 tracing-subscriber = { workspace = true }
-url = { version = "2.5", features = ["serde"] }
 yt-dlp = { version = "2.7", features = [
     "hooks",
     "hickory-dns",
@@ -44,7 +42,6 @@ mobile = ["dioxus/mobile"]
 server = [
     "dioxus/server",
     "dep:arboard",
-    "dep:dashmap",
     "dep:nucleo-matcher",
     "dep:reqwest",
     "reqwest/hickory-dns",

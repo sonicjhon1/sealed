@@ -19,12 +19,9 @@ lupabase = { git = "https://github.com/sonicjhon1/lupabase", features = [
     "cbor",
     "nightly",
 ] }
-image = { version = "0.25", features = ["rayon"] }
-rayon = { version = "1.11" }
 rootcause = "0.12"
 rootcause-backtrace = "0.12"
 serde = { version = "1.0.228", features = ["derive"] }
-tracing = { version = "0.1", features = ["log"] }
 tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
 
 [workspace.lints.clippy]

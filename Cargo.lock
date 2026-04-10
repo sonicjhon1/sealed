@@ -5186,7 +5186,6 @@ dependencies = [
  "arboard",
  "base64",
  "chrono",
- "dashmap",
  "derive_more 2.1.1",
  "dioxus",
  "enable-ansi-support",
@@ -5199,7 +5198,6 @@ dependencies = [
  "serde",
  "serde_bytes",
  "tracing-subscriber",
- "url",
  "yt-dlp",
 ]
 
@@ -6406,7 +6404,6 @@ dependencies = [
  "idna",
  "percent-encoding",
  "serde",
- "serde_derive",
 ]
 
 [[package]]
