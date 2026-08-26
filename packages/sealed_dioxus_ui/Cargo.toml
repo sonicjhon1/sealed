@@ -28,7 +28,7 @@ rootcause-backtrace = { workspace = true }
 serde = { workspace = true }
 serde_bytes = { version = "0.11" }
 tracing-subscriber = { workspace = true }
-yt-dlp = { version = "2.7", features = [
+yt-dlp = { version = "2.8", features = [
     "hooks",
     "hickory-dns",
     "rustls",

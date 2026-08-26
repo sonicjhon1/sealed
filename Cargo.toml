@@ -21,7 +21,7 @@ lupabase = { git = "https://github.com/sonicjhon1/lupabase", features = [
 ] }
 rootcause = "0.12"
 rootcause-backtrace = "0.12"
-serde = { version = "1.0.228", features = ["derive"] }
+serde = { version = "1.0.229", features = ["derive"] }
 tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
 
 [workspace.lints.clippy]
